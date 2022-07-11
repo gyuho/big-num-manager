@@ -1,0 +1,16 @@
+[package]
+name = "big-num-manager"
+version = "0.0.1" # https://crates.io/crates/big-num-manager
+edition = "2021"
+rust-version = "1.62"
+publish = true
+description = "Rust big num manager"
+repository = "https://github.com/gyuho/big-num-manager"
+readme = "README.md"
+license = "Apache-2.0"
+
+[dependencies]
+num-bigint = { version = "0.4.3", optional = false }
+serde = { version = "1.0.139", features = ["derive"], optional = false }
+
+[dev-dependencies]
