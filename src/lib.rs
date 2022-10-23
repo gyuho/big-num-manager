@@ -10,7 +10,7 @@ use num_bigint::BigInt;
 /// "0x1312D00" is "20000000".
 /// ref. https://www.rapidtables.com/convert/number/hex-to-decimal.html
 pub fn from_hex_to_big_int(s: &str) -> io::Result<BigInt> {
-    let sb = strip_0x(s).as_bytes();
+    let sb = s.trim_start_matches("0x").as_bytes();
 
     // ref. https://docs.rs/num-bigint/latest/num_bigint/struct.BigInt.html
     let b = match BigInt::parse_bytes(sb, 16) {
@@ -59,12 +59,4 @@ fn test_hex() {
     assert_eq!(from_hex_to_big_int("0x1312D00").unwrap(), big_num);
     assert_eq!(big_int_to_lower_hex(&big_num), "0x1312d00",);
     assert_eq!(big_int_to_upper_hex(&big_num), "0x1312D00",);
-}
-
-fn strip_0x(s: &str) -> &str {
-    if &s[0..2] == "0x" {
-        &s[2..]
-    } else {
-        s
-    }
 }
